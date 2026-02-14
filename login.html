@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSEUS PASS | Login</title>
+    <link rel="stylesheet" href="style/login_asseus.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <main>
+        <div class="foto_logo">
+            <img class="logo_asseus" src="img/logo_asseus.png" alt="logo_asseus">
+        </div>
+
+        <div class="login">
+            <form action="login_asseus">
+
+                <label for="nome_login">Seu nome</label>
+                <input type="text" placeholder="Seu nome" id="nome_login">
+
+                <br>
+
+                <label for="senha_login">Senha</label>
+                <input type="password" placeholder="Senha" id="senha_login">
+                
+                <br>
+                <div class="lembrar-ususario-div">
+                    <input type="radio" id="lembrar-ususario">
+                    <label for="lembrar-ususario">Lembrar usuário</label>
+                </div>
+                
+                <br>
+
+                <button type="button" id="button-submit" onclick="usuario()">Enviar</button>
+
+                <p>Esqueceu a senha? <a href="">Clique aqui!</a></p>
+            </form>
+        </div>
+
+    </main>
+</body>
+</html>
