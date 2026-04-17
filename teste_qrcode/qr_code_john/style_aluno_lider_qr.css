@@ -1,0 +1,108 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100vh;
+}
+header{
+    background-color:#032748;
+    margin: 0px;
+    width: 100vw;
+    height: 7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header > h1{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+}
+
+main{
+    
+    width: 100vw;
+    height: 60vh;
+   
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    flex-direction: column;
+
+}
+.infor_aluno{
+    margin-top: 5%;
+    display: flex;
+    
+    width: 90vw;
+    height: 20vh;
+    background-color: #032748;
+    border-radius: 10px;
+}
+.foto,.infor{
+    width: 50%;
+    height: 100%;
+}
+.foto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.infor_aluno > .foto > img{
+    border-radius: 5%;
+    width: 80%;
+    height: 80%;
+}
+
+.infor{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    
+    
+}
+
+.infor > h2{
+    font-size: 16px;
+    margin-top: 5px;
+    
+}
+.infor > p, footer > p{
+    font-size: 12px;
+    color: #fff;
+    
+}
+
+.qr_code{
+    height: 50%;
+}
+
+.espacamento{
+    height: 20%;
+}
+
+footer{
+    margin-top: 41%;
+    background-color: #032748;
+    height: 14vh;
+    width: 100vw;
+    align-items: flex-end;
+
+    bottom: 0;       /* Prega exatamenta na linha zero da parte de baixo */
+    left: 0;         /* Cola na margem esquerda */
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer > p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
