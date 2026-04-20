@@ -1,6 +1,6 @@
 function sucessoNaLeitura(textoDecodificado){
     document.getElementById("resultado").innerText = "Código Lido: " + textoDecodificado;
-
+    
     if (navigator.vibrate) navigator.vibrate(200);
 }
 
