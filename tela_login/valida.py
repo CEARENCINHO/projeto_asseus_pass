@@ -1,3 +1,4 @@
+# foi criado para teste, simulando um banco de dados
 from fastapi import *
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
