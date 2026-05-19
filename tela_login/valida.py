@@ -13,7 +13,8 @@ app.add_middleware(
 )
 
 banco_dados = {
-    "John Marley":['12345','aluno','Fastech','nortuno']
+    "John Marley":['12345','aluno','Fastech','nortuno'],
+    "Diogo":['12345','lider','Fastech','nortuno']
 }
 
 class DadosLogin(BaseModel): # aqui diz como vai se comporto os dados que entrarem
