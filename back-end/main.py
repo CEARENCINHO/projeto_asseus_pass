@@ -21,19 +21,44 @@ class cadastroAluno(BaseModel):
     status_aluno: str
     periodo: str
 
-#def banco_associados:
-    # fazer uma função que acesse banco de dados dos associados         
+class cadastroFaculdade(BaseModel):
+    nomeFaculdade: str
+    enderecoFaculdade: str
+    cidade: str
+
+def banco_associados(comando,valor=None):
+    try:
+        config = {
+            'host':'127.0.0.1',
+            'user':'root',
+            'password':'93g@Fvk7fdc',
+            'database':'banco_produto'
+        }
+        conexao = mysql.connector.connect(**config)
+        cursor = conexao.cursor()
+
+
+
+    except mysql.connector.Error as erro:
+        print(f'Error ao conectar: {erro}')
+    
+    finally:
+        if 'conexao' in locals() and conexao.is_connected():
+            cursor.close()
+            conexao.close()
+            print(" Conexão encerrada.")
 
 @app.post("/cadastroAluno")
 def cadastro_aluno(dados: cadastroAluno):
-    # teste para verificar se deu certo essa merda
-    print(f"Nome do Aluno: {dados.nome}")
-    print(f"Telefone: {dados.telefone}")
-    print(f"CPF: {dados.cpf}")
-    print(f"E-mail: {dados.email}")
-    print(f"Faculdade: {dados.faculdade}")
-    print(f"Status do Aluno: {dados.status_aluno}")
-    print(f"Período: {dados.periodo}")
+    valor = (dados.nome,dados.telefone,dados.cpf,dados.email,dados.faculdade,dados.status_aluno,dados.periodo)
 
+    comando = """
+        use associados_ASSEUS;
 
-    # parando as 3:21 :c
+        insert into associados (nome,numero,cpf,email,faculdade,status_aluno,periodo) values (%s,%s,%s,%s,%s,%s,%s,)
+"""
+    banco_associados(comando,)
+
+@app.post('/cadastroFaculdade')
+def cadastro_Faculdade(dados: cadastroFaculdade):
+    return
