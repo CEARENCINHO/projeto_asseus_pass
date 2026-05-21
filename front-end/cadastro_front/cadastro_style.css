@@ -13,14 +13,20 @@ header{
     width: 100%;
 }
 
-nav > span{ 
+nav > button{ 
     transition: 0.5s;
     margin: 1vw;
+    background-color: #032748;
+    border: none;
+    color: #f4f4f4;
+    font-size: 12px;
+
 }
 
-nav > span:hover{
-    transition: 1.0s;
-    border-bottom: 2px #fff solid;
+nav > button:hover{
+    transition: 0.5s;
+    font-size: 14px;
+    color: #fff;
 
 }
 
@@ -56,28 +62,28 @@ main{
 
 /*   cadastro aluno */
 
-.palco-formulario > #cadastro-formulario > .caixa-input{
+.palco-formulario > .cadastro-formulario > .caixa-input{
     padding: 0 10px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 15px;
 }
-.palco-formulario > #cadastro-formulario > .caixa-input > input{
+.palco-formulario > .cadastro-formulario > .caixa-input > input{
     padding: 4px 5px;
     border: none;
     border-radius: 5px;
     outline: none;
 }
-.palco-formulario > #cadastro-formulario > .caixa-input > input:focus{
+.palco-formulario > .cadastro-formulario > .caixa-input > input:focus{
     transition: 1.0s;
     outline: 2px #032748 solid;
     border-radius: 5px;
 }
-.palco-formulario > #cadastro-formulario > div{
+.palco-formulario > .cadastro-formulario > div{
     display: flex;
     justify-content: center;
 }
-.palco-formulario > #cadastro-formulario > div > .botao{
+.palco-formulario > .cadastro-formulario > div > .botao{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     padding: 5px 20px;
@@ -87,7 +93,7 @@ main{
     border-radius: 5px;
     transition: 0.2s;
 }
-.palco-formulario > #cadastro-formulario > div > .botao:active{
+.palco-formulario > .cadastro-formulario > div > .botao:active{
     
     background-color: #04203a;
 }
@@ -96,3 +102,4 @@ main{
 .tabela-aluno{
     width: 60vw;
 }
+
