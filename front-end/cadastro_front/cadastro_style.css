@@ -1,0 +1,98 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+header{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #032748;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    height: 10vh;
+    width: 100%;
+}
+
+nav > span{ 
+    transition: 0.5s;
+    margin: 1vw;
+}
+
+nav > span:hover{
+    transition: 1.0s;
+    border-bottom: 2px #fff solid;
+
+}
+
+main{
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
+.palco-formulario{
+    width: 30vw;
+    height: 70vh;
+    border-radius: 15px;
+    background-color: #f4f4f4;
+    padding: 50px 20px;
+}
+
+.palco-formulario > h1{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+.formulario{
+    width: 40vw;
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    height: fit-content;
+    font-family: arial;
+}
+
+/*   cadastro aluno */
+
+.palco-formulario > #cadastro-formulario > .caixa-input{
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.palco-formulario > #cadastro-formulario > .caixa-input > input{
+    padding: 4px 5px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+.palco-formulario > #cadastro-formulario > .caixa-input > input:focus{
+    transition: 1.0s;
+    outline: 2px #032748 solid;
+    border-radius: 5px;
+}
+.palco-formulario > #cadastro-formulario > div{
+    display: flex;
+    justify-content: center;
+}
+.palco-formulario > #cadastro-formulario > div > .botao{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 5px 20px;
+    color: #fff;
+    background-color: #032748;
+    border: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+.palco-formulario > #cadastro-formulario > div > .botao:active{
+    
+    background-color: #04203a;
+}
+
+
+.tabela-aluno{
+    width: 60vw;
+}
