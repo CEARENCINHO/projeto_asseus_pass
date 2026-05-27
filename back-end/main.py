@@ -29,16 +29,17 @@ class cadastroFaculdade(BaseModel):
 
 def banco_associados(comando,valor=None):
     try:
-        conexao = mysql.connector.connect(config)
+        conexao = mysql.connector.connect(**config)
         cursor = conexao.cursor()
-
+        cursor.execute(comando,valor)
+        conexao.commit()
 
 
     except mysql.connector.Error as erro:
         print(f'Error ao conectar: {erro}')
     
     finally:
-        if 'conexao' in locals() and conexao.is_connected(config):
+        if 'conexao' in locals() and conexao.is_connected():
             cursor.close()
             conexao.close()
             print(" Conexão encerrada.")
@@ -50,9 +51,9 @@ def cadastro_aluno(dados: cadastroAluno):
     comando = """
         use associados_ASSEUS;
 
-        insert into associados (nome,numero,cpf,email,faculdade,status_aluno,periodo) values (%s,%s,%s,%s,%s,%s,%s,)
+        insert into associados (nome,numero,cpf,email,faculdade,status_aluno,periodo) values(%s,%s,%s,%s,%s,%s,%s);
 """
-    banco_associados(comando)
+    banco_associados(comando,valor)
 
 @app.post('/cadastroFaculdade')
 def cadastro_Faculdade(dados: cadastroFaculdade):
