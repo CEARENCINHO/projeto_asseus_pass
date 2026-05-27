@@ -13,7 +13,7 @@ function alterarSenha(){
     
 }
 
-function carterinha(){
+function carterinha(nome){
     palco.innerHTML = `
         <section class="infor_aluno">
             <div class="foto">
@@ -25,7 +25,7 @@ function carterinha(){
                 <h2>Faculdade:</h2>
                 <p id=nomeFaculdade></p>
                 <h2>Periodo:</h2>
-                <p id=''periodo></p>
+                <p id='periodo'></p>
             </div>
         </section>
 
@@ -36,6 +36,8 @@ function carterinha(){
             <div id="caixa-qrcode-aluno"></div>
         </section>
     `
+    
+
     new QRCode(document.getElementById('caixa-qrcode-aluno'),{
         text: 'ALUNO-NOMEALUNO-FACULDADE',
         width: 250,
@@ -43,6 +45,8 @@ function carterinha(){
         colorDark: '#000',
         colorLight: '#fff'
     });
+
+    document.getElementById('nomeALuno').innerText = nome;  
 
 }
 
