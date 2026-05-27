@@ -31,6 +31,9 @@ class login(BaseModel):
     usuario: str
     senha: str
 
+class buscar(BaseModel):
+    dado: str
+
 def banco_associados(comando,valor=None):
     try:
         conexao = mysql.connector.connect(**config)
@@ -117,6 +120,14 @@ def validarLogin(dados: login):
             'status_usuario':False
         }
     
-            
-            
+
+@app.get('/buscar/{dado}')      
+def buscarInfor(dado:str):
+    comando = f"""
+    select * from associados where nome = {dado};
+"""
+    resultado = banco_associados(comando)
+
+    print(resultado)
+    
     
