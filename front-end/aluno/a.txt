@@ -1,0 +1,20 @@
+        <section class="infor_aluno">
+            <div class="foto">
+                <img src="../img/foto_aluno.png" alt="">
+            </div>
+            <div class="infor">
+                <h2 style="margin: 0px;">Nome do aluno:</h2>
+                <p>nome do aluno</p>
+                <h2>Faculdade:</h2>
+                <p>nome da faculdade</p>
+                <h2>Periodo:</h2>
+                <p>periodo da aula</p>
+            </div>
+        </section>
+
+        <section class="espacamento">
+
+        </section>
+        <section class="qr_code">
+            <div id="caixa-qrcode-aluno"></div>
+        </section>

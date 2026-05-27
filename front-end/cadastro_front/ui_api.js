@@ -1,3 +1,6 @@
+document.addEventListener("DOMContentLoaded", function() {
+    carregarFormularioAluno();
+});
 // para alternar os formularios
 const palco = document.getElementById('palco-formulario');
 const tabela = document.getElementById('teste');
@@ -102,7 +105,7 @@ function carregarCadastroFaculdade(){
     palco.innerHTML = `
     <h1>Cadastro de Faculdade</h1>
     <hr>
-    <form class="cadastro-formulario" id="cadastro-formulario">
+    <form class="cadastro-formulario" id="cadastro-faculdade">
         <div class="caixa-input">
             <label for="nome-faculdade">Nome da Faculdade</label>
             <input type="text" id="nome-faculdade" placeholder="Nome da Faculdade" required>
@@ -126,4 +129,25 @@ function carregarCadastroFaculdade(){
         </div>
     </form>
     `
+    const cadastroFaculdade = document.getElementById('cadastro-faculdade')
+    
+    cadastroFaculdade.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        nomeFaculdade = document.getElementById('nome-faculdade').value
+        enderecoFaculdade = document.getElementById('endereco-faculdade').value
+        cidade = document.getElementById('cidade').value
+
+        const dadosFaculdade = {
+            nomeFaculade: nomeFaculdade,
+            enderecoFaculdade: enderecoFaculdade,
+            cidade: cidade
+        }
+
+        await fetch('http://127.0.0.1:8000/cadastroFaculdade',{
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(dadosFaculdade)
+        })
+    })
 }

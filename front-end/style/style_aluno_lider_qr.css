@@ -106,3 +106,31 @@ footer > p{
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
 }
+
+
+.alterando-senha > #alterando_login-senha{
+    height: 20vh;
+    background-color: #f4f4f4;
+    padding: 20px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+.alterando-senha > #alterando_login-senha > .butao{
+    background-color: #032748;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    
+}
+
+.alterando-senha > #alterando_login-senha > .input-senha{
+    border-radius: 5px;
+    padding: 5px;
+}
