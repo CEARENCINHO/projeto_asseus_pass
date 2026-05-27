@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import mysql.connector
+from conexao import config 
 
 app = FastAPI()
 
@@ -28,13 +29,7 @@ class cadastroFaculdade(BaseModel):
 
 def banco_associados(comando,valor=None):
     try:
-        config = {
-            'host':'127.0.0.1',
-            'user':'root',
-            'password':'93g@Fvk7fdc',
-            'database':'banco_produto'
-        }
-        conexao = mysql.connector.connect(**config)
+        conexao = mysql.connector.connect(config)
         cursor = conexao.cursor()
 
 
@@ -43,7 +38,7 @@ def banco_associados(comando,valor=None):
         print(f'Error ao conectar: {erro}')
     
     finally:
-        if 'conexao' in locals() and conexao.is_connected():
+        if 'conexao' in locals() and conexao.is_connected(config):
             cursor.close()
             conexao.close()
             print(" Conexão encerrada.")
@@ -57,7 +52,7 @@ def cadastro_aluno(dados: cadastroAluno):
 
         insert into associados (nome,numero,cpf,email,faculdade,status_aluno,periodo) values (%s,%s,%s,%s,%s,%s,%s,)
 """
-    banco_associados(comando,)
+    banco_associados(comando)
 
 @app.post('/cadastroFaculdade')
 def cadastro_Faculdade(dados: cadastroFaculdade):
