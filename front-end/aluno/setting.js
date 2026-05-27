@@ -39,6 +39,7 @@ function carterinha(nome){
     const dados = await fetch('http://127.0.0.1:8000/buscar/${nome}')
 
 
+
     new QRCode(document.getElementById('caixa-qrcode-aluno'),{
         text: 'ALUNO-NOMEALUNO-FACULDADE',
         width: 250,
@@ -60,7 +61,7 @@ document.addEventListener('DOMContentLoaded',() => {
     }
 
     const aluno = JSON.parse(dadosAluno);
-    if (aluno.conta_aluno == 1){
+    if (aluno.conta_aluno == 0){
         alterarSenha()
     } else{
         carterinha(aluno.nome_aluno)
