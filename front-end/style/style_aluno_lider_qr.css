@@ -80,6 +80,8 @@ main{
 
 .qr_code{
     height: 50%;
+    display: flex;
+    justify-content: center;
 }
 
 .espacamento{
