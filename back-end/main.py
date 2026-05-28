@@ -37,13 +37,19 @@ class buscar(BaseModel):
 def banco_associados(comando,valor=None):
     try:
         conexao = mysql.connector.connect(**config)
+
         cursor = conexao.cursor()
+        cursor.execute("USE associados_ASSEUS;")
+        cursor.close() 
+
+        
+        cursor = conexao.cursor(dictionary=True)
 
         if valor != None:
             cursor.execute(comando,valor)
             conexao.commit()
+            return None
         elif valor == None:
-            cursor = conexao.cursor(dictionary=True)
             cursor.execute(comando)
             lista = cursor.fetchall()
             print(lista)
@@ -55,6 +61,11 @@ def banco_associados(comando,valor=None):
         print(f'Error ao conectar: {erro}')
     
     finally:
+        if 'cursor' in locals() and cursor is not None:
+            try:
+                cursor.close()
+            except:
+                pass
         if 'conexao' in locals() and conexao.is_connected():
             cursor.close()
             conexao.close()
@@ -65,8 +76,6 @@ def cadastro_aluno(dados: cadastroAluno):
     valor = (dados.nome,dados.telefone,dados.cpf,dados.email,dados.faculdade,dados.status_aluno,dados.periodo)
 
     comando = """
-        use associados_ASSEUS;
-
         insert into associados (nome,numero,cpf,email,faculdade,status_aluno,periodo) values(%s,%s,%s,%s,%s,%s,%s);
 """
     banco_associados(comando,valor)
@@ -74,8 +83,6 @@ def cadastro_aluno(dados: cadastroAluno):
     valor = (dados.nome, dados.cpf,0)
 
     comando = """
-    use associados_ASSEUS;
-
     insert into usuario (nome_usuario,senha,acesso) values(%s,%s,%s);
 """
     banco_associados(comando,valor)
@@ -91,6 +98,9 @@ def validarLogin(dados: login):
     select * from associados;
 """
     banco = banco_associados(comando)
+
+    comando_user = 'select * from usuario;'
+    lista_senha = banco_associados(comando_user)
 
     for i in banco:
         if dados.usuario == i['nome']:
@@ -124,9 +134,9 @@ def validarLogin(dados: login):
 @app.get('/buscar/{dado}')      
 def buscarInfor(dado:str):
     comando = f"""
-    select * from associados where nome = {dado};
+    select * from associados where nome = %s;
 """
-    resultado = banco_associados(comando)
+    resultado = banco_associados(comando, (dado,))
 
     print(resultado)
     
