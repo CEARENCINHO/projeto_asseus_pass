@@ -22,10 +22,10 @@ header > h1{
 main{
     
     width: 100vw;
-    height: 60vh;
+    height: 90vh;
    
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     
     flex-direction: column;
@@ -34,7 +34,6 @@ main{
 .infor_aluno{
     margin-top: 5%;
     display: flex;
-    
     width: 90vw;
     height: 20vh;
     background-color: #032748;
@@ -111,6 +110,7 @@ footer > p{
 
 
 .alterando-senha > #alterando_login-senha{
+
     height: 20vh;
     background-color: #f4f4f4;
     padding: 20px 50px;
@@ -135,4 +135,42 @@ footer > p{
 .alterando-senha > #alterando_login-senha > .input-senha{
     border-radius: 5px;
     padding: 5px;
+}
+
+/*--------------------scanner----------------*/
+
+.scanner > #leitor-camera{
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.scanner > #resultado{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+    background-color: #032748;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+.button{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+#statusBus{
+
+    background-color: #032748;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+}
+
+#statusBus:active{
+    transition: 0.5s;
+    background-color: #03192f;
 }

@@ -139,7 +139,7 @@ function carregarCadastroFaculdade(){
         cidade = document.getElementById('cidade').value
 
         const dadosFaculdade = {
-            nomeFaculade: nomeFaculdade,
+            nomeFaculdade: nomeFaculdade,
             enderecoFaculdade: enderecoFaculdade,
             cidade: cidade
         }

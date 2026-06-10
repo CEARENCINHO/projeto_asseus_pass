@@ -34,7 +34,10 @@ class login(BaseModel):
 class buscar(BaseModel):
     dado: str
 
-def banco_associados(comando,valor=None):
+class alterar(BaseModel):
+    senha: str
+    nome: str
+def banco_associados(comando,valor=None): # função de acesso ao banco de dados
     try:
         conexao = mysql.connector.connect(**config)
         cursor = conexao.cursor()
@@ -46,7 +49,6 @@ def banco_associados(comando,valor=None):
             cursor = conexao.cursor(dictionary=True)
             cursor.execute(comando)
             lista = cursor.fetchall()
-            print(lista)
             return lista
 
 
@@ -80,13 +82,17 @@ def cadastro_aluno(dados: cadastroAluno):
 """
     banco_associados(comando,valor)
     
-@app.post('/cadastroFaculdade')
+@app.post('/cadastroFaculdade') # programar
 def cadastro_Faculdade(dados: cadastroFaculdade):
-    return
+    valores = dados.nomeFaculdade,dados.enderecoFaculdade, dados.cidade
+    comando = '''
+insert into cadastro_faculdade (nome_faculdade,endereco,cidade) values(%s,%s,%s);
+'''
+    banco_associados(comando,valores)
 
 @app.post('/login')
 def validarLogin(dados: login):
-    print('oi')
+    
     comando = """
     select * from associados;
 """
@@ -123,11 +129,66 @@ def validarLogin(dados: login):
 
 @app.get('/buscar/{dado}')      
 def buscarInfor(dado:str):
+    
     comando = f"""
-    select * from associados where nome = {dado};
+    select * from associados where nome = '{dado}';
 """
     resultado = banco_associados(comando)
+    return {
+        'nome':resultado[0]['nome'],
+        'faculdade':resultado[0]['faculdade'],
+        'periodo':resultado[0]['periodo']
+    }
+    
+@app.post('/alterar')
+def alterarSenha(dado: alterar):
+    valores = dado.senha , dado.nome
+    
+    comando = """
+    SET SQL_SAFE_UPDATES = 0;
+    update usuario set senha = %s, acesso = 1 where nome_usuario = %s;
+"""
+    banco_associados(comando,valores)
+    return {
+        'dado':True
+    }
 
-    print(resultado)
-    
-    
+
+@app.get('/validarQRCode/{QRCode}')
+def qrcode(QRCode:str):
+    print(QRCode)# codigo do QRcode: "nomeAluno-nomeFaculdade"
+    try:
+        nome,faculdade = QRCode.split('-')
+        comando = 'select nome,faculdade from associados;'
+        lista = banco_associados(comando) # retorna a lista que tem no banco de dados
+        
+        for i in lista:
+
+            verificacao = banco_associados('select nome,faculdade from aluno_onibus;')
+            for a in verificacao:
+                
+                if nome in a["nome"] and faculdade in a["faculdade"]:# verifica se o aluno já esta no onibus
+                    
+                    return{
+                    'usuario': True,
+                    'nome': 'Já esta dentro do onibus!'
+                }
+
+
+            if nome == i["nome"] and faculdade == i["faculdade"]:
+                valor = i["nome"],i["faculdade"],0
+                comando = '''
+                insert into aluno_onibus (nome,faculdade,status_aluno) values(%s,%s,%s);
+'''
+                banco_associados(comando,valor)
+                return{
+                    'usuario': True,
+                    'nome': i["nome"]
+                }
+        return{
+            'usuario': False
+        }
+    except:
+        return{
+                    'usuario': 'QRcode não compativel!'
+                }

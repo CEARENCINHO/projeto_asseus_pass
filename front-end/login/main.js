@@ -15,27 +15,29 @@ async function enviar_usuario(){
                                 //depois resolver a porta pq quando tiver pronto isso vai da B.O. Por enquanto 
                                 // porta 5500 do LiverServer
         
-        if (validacao.status_usuario == 'aluno'){
+        //if (validacao.status_usuario == 'aluno'){
 
-            const dadoAluno = {
-                nome_aluno: validacao.nome_aluno,
-                conta_aluno: validacao.conta
-            }
-
-            localStorage.setItem('aluno',JSON.stringify(dadoAluno))
-            window.location.href = "/front-end/aluno/qr_aluno.html";
-
-        } else if ( validacao.status_usuario == 'lider'){  
-            
-            const dadoLider = {
-                nome_lider: validacao.nome_aluno,
-                conta_lider: validacao.conta
-            }
-
-            localStorage.setItem('lider',JSON.stringify(dadoLider))
-            window.location.href = "/front-end/lider/scanner_lider.html";
+        const dadoAluno = {
+            nome_aluno: validacao.nome_aluno,
+            conta_aluno: validacao.conta,
+            status_aluno: validacao.status_usuario
         }
-    } else {
-        alert("Acesso Negado: " + validacao.mensagem);
+
+        localStorage.setItem('aluno',JSON.stringify(dadoAluno))
+        window.location.href = "/front-end/aluno/qr_aluno.html";
+
+        //} else if ( validacao.status_usuario == 'lider'){  
+            
+        //    const dadoLider = {
+        //        nome_lider: validacao.nome_aluno,
+        //        conta_lider: validacao.conta
+        //    }
+
+        //    localStorage.setItem('lider',JSON.stringify(dadoLider))
+        //    window.location.href = "/front-end/lider/scanner_lider.html";
+        //}
+    //} else {
+    //    alert("Acesso Negado: " + validacao.mensagem);
     }   
+    alert('Cadastro feito com sucesso!')
 }
