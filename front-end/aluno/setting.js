@@ -1,12 +1,13 @@
+
 const palco = document.getElementById('palco')
 // ------------------------------- lider ------------------------------//
 
 
-async function sucessoNaLeitura(textoDecodificado){
+async function sucessoNaLeitura(textoDecodificado,otrajeto){
     //enviar para a API e validar
-
-    const resposta = await fetch(`http://127.0.0.1:8000/validarQRCode/${textoDecodificado}`)
-        
+    //alert(otrajeto,'oi')
+    const resposta = await fetch(`http://127.0.0.1:8000/validarQRCode/${textoDecodificado}-${otrajeto}`)
+    
     const dados = await resposta.json()
     if (dados.usuario == true){
         document.getElementById("resultado").innerText = "Aluno:" + dados.nome;
@@ -60,18 +61,24 @@ async function scanner(nome){
         </section>
 
         <section class='button'>
+            <select id="trajeto">
+                <option value="ida">Ida</option>
+                <option value="volta">Volta</option>
+            </select>
+
             <button id="statusBus" Onclick='tabelaBus()'>Status onibus</button>
         </section>
     `
+    const valorTrajeto = document.getElementById('trajeto').value
     
     const resposta = await fetch(`http://127.0.0.1:8000/buscar/${nome}`)
         
     const dados = await resposta.json()
-    
-    
+
+
+    alert(valorTrajeto)
     document.getElementById('nomeALuno').innerText = dados.nome;
     document.getElementById('nomeFaculdade').innerText = dados.faculdade;
-    
     document.getElementById('periodo').innerText = dados.periodo;
 
 

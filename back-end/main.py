@@ -158,7 +158,8 @@ def alterarSenha(dado: alterar):
 def qrcode(QRCode:str):
     print(QRCode)# codigo do QRcode: "nomeAluno-nomeFaculdade"
     try:
-        nome,faculdade = QRCode.split('-')
+        nome,faculdade,trajeto = QRCode.split('-')
+        print(trajeto)
         comando = 'select nome,faculdade from associados;'
         lista = banco_associados(comando) # retorna a lista que tem no banco de dados
         

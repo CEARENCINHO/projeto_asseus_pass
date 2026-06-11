@@ -39,5 +39,5 @@ async function enviar_usuario(){
     //} else {
     //    alert("Acesso Negado: " + validacao.mensagem);
     }   
-    alert('Cadastro feito com sucesso!')
+    
 }

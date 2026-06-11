@@ -22,7 +22,7 @@ header > h1{
 main{
     
     width: 100vw;
-    height: 90vh;
+    height: auto;
    
     display: flex;
     justify-content: space-between;
@@ -88,7 +88,7 @@ main{
 }
 
 footer{
-    margin-top: 41%;
+    margin-top: 25%;
     background-color: #032748;
     height: 14vh;
     width: 100vw;
@@ -157,7 +157,7 @@ footer > p{
 .button{
     display: flex;
     margin-top: 20px;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 #statusBus{
 
@@ -168,6 +168,10 @@ footer > p{
     color: #fff;
     border-radius: 10px;
     border: none;
+}
+
+.button > #trajeto{
+    width: 50px;
 }
 
 #statusBus:active{
