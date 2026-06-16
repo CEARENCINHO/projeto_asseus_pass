@@ -3,10 +3,15 @@ const palco = document.getElementById('palco')
 // ------------------------------- lider ------------------------------//
 
 
-async function sucessoNaLeitura(textoDecodificado,otrajeto){
+async function sucessoNaLeitura(textoDecodificado){
     //enviar para a API e validar
     //alert(otrajeto,'oi')
-    const resposta = await fetch(`http://127.0.0.1:8000/validarQRCode/${textoDecodificado}-${otrajeto}`)
+    const rota = document.getElementById('trajeto').value
+    // minha logica: colocar uma opção que fale qual é a rota, se é ida ou a volta. 
+    // Se for ida, o algoritmo adicionar o aluno na tabela de quem ta no onibus.
+    // se for volta, o algortimo tira o aluno da tabela, se caso o aluno não tiver na tabela isso quer dizer que o aluno esta voltando de sinop.
+    alert(rota)
+    const resposta = await fetch(`http://127.0.0.1:8000/validarQRCode/${textoDecodificado}-${rota}`)
     
     const dados = await resposta.json()
     if (dados.usuario == true){
@@ -69,14 +74,14 @@ async function scanner(nome){
             <button id="statusBus" Onclick='tabelaBus()'>Status onibus</button>
         </section>
     `
-    const valorTrajeto = document.getElementById('trajeto').value
+    //const valorTrajeto = document.getElementById('trajeto').value
     
     const resposta = await fetch(`http://127.0.0.1:8000/buscar/${nome}`)
         
     const dados = await resposta.json()
 
 
-    alert(valorTrajeto)
+    
     document.getElementById('nomeALuno').innerText = dados.nome;
     document.getElementById('nomeFaculdade').innerText = dados.faculdade;
     document.getElementById('periodo').innerText = dados.periodo;
