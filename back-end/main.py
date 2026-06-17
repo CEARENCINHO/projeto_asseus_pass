@@ -156,40 +156,60 @@ def alterarSenha(dado: alterar):
 
 @app.get('/validarQRCode/{QRCode}')
 def qrcode(QRCode:str):
-    print(QRCode)# codigo do QRcode: "nomeAluno-nomeFaculdade"
+    print(QRCode)# codigo do QRcode: "nomeAluno-nomeFaculdade-trjeto"
     try:
         nome,faculdade,trajeto = QRCode.split('-')
         print(trajeto)
         comando = 'select nome,faculdade from associados;'
         lista = banco_associados(comando) # retorna a lista que tem no banco de dados
         
-        for i in lista:
-
-            verificacao = banco_associados('select nome,faculdade from aluno_onibus;')
-            for a in verificacao:
-                
-                if nome in a["nome"] and faculdade in a["faculdade"]:# verifica se o aluno já esta no onibus
+        verificacao = banco_associados('select nome,faculdade from aluno_onibus;')
+        if trajeto == 'ida':
+            for i in lista:
+                for a in verificacao:
                     
+                    if nome in a["nome"] and faculdade in a["faculdade"]:# verifica se o aluno já esta no onibus
+                        
+                        return{
+                        'usuario': True,
+                        'nome': 'Já esta dentro do onibus!'
+                    }
+
+
+                if nome == i["nome"] and faculdade == i["faculdade"]:
+                    valor = i["nome"],i["faculdade"]
+                    comando = '''
+                    insert into aluno_onibus (nome,faculdade) values(%s,%s);
+    '''
+                    banco_associados(comando,valor)
                     return{
-                    'usuario': True,
-                    'nome': 'Já esta dentro do onibus!'
-                }
-
-
-            if nome == i["nome"] and faculdade == i["faculdade"]:
-                valor = i["nome"],i["faculdade"],0
-                comando = '''
-                insert into aluno_onibus (nome,faculdade,status_aluno) values(%s,%s,%s);
+                        'usuario': True,
+                        'nome': i["nome"]
+                    }
+            return{
+                'usuario': False
+            }
+        elif trajeto == 'volta':
+            for i in lista:
+                for a in verificacao:
+                    if nome in a["nome"] and faculdade in a["faculdade"]:# verifica se o aluno já esta no onibus
+                        valores = nome,faculdade
+                        comando = '''
+                        DELETE FROM aluno_onibus WHERE nome = %s AND faculdade = %s;
 '''
-                banco_associados(comando,valor)
-                return{
-                    'usuario': True,
-                    'nome': i["nome"]
-                }
-        return{
-            'usuario': False
-        }
+                        banco_associados(comando,valores)
+                        return{
+                        'usuario': True,
+                        'nome': f'{nome} Voltou'
+                    }
     except:
         return{
                     'usuario': 'QRcode não compativel!'
                 }
+    
+@app.get('/listar')
+def listar():
+    comando = 'select * from aluno_onibus;'
+    lista = banco_associados(comando)
+    print(lista)
+    return lista

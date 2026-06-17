@@ -10,7 +10,7 @@ async function sucessoNaLeitura(textoDecodificado){
     // minha logica: colocar uma opção que fale qual é a rota, se é ida ou a volta. 
     // Se for ida, o algoritmo adicionar o aluno na tabela de quem ta no onibus.
     // se for volta, o algortimo tira o aluno da tabela, se caso o aluno não tiver na tabela isso quer dizer que o aluno esta voltando de sinop.
-    alert(rota)
+    
     const resposta = await fetch(`http://127.0.0.1:8000/validarQRCode/${textoDecodificado}-${rota}`)
     
     const dados = await resposta.json()
@@ -33,11 +33,42 @@ async function sucessoNaLeitura(textoDecodificado){
 }
 
 
-function tabelaBus(){
+async function tabelaBus(){
+    // Inicializa o palco com um título e uma lista vazia
     palco.innerHTML = `
-        <h1>Deu certo</h1>
-    `
+        <h1>Lista de Alunos</h1>
+        <ul id="lista-alunos" style="list-style: none; padding: 0;"></ul>
+    `;
+    
+    try {
+        
+        const respostaListar = await fetch('http://127.0.0.1:8000/listar');
+        
+       
+        const dados = await respostaListar.json();
+        
+        
+        const listaUl = document.getElementById('lista-alunos');
+        
+        
+        dados.forEach(pessoa => {
+            listaUl.innerHTML += `
+                <li style="margin-bottom: 15px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+                    <strong>Nome:</strong> ${pessoa.nome} <br>
+                    <strong>Faculdade:</strong> ${pessoa.faculdade}
+                </li>
+            `;
+        });
+        
+    } catch (erro) {
+        
+        console.error("Erro ao buscar os dados:", erro);
+        palco.innerHTML += `<p style="color: red;">Erro ao carregar os dados. Verifique se o servidor Python está rodando.</p>`;
+    }
 }
+    
+    
+
 
 async function scanner(nome){
     palco.innerHTML = `
@@ -165,7 +196,7 @@ async function carterinha(nome){
         <section class="espacamento">
 
         </section>
-        <section class="qr_code">
+        <section class="qr_code" style="margin: 80px 0px">
             <div id="caixa-qrcode-aluno"></div>
         </section>
     `
